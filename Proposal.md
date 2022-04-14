@@ -12,7 +12,9 @@ We will attempt to use both national and state-level databases to help us addres
 ### Conclusion 
 As students who reside in the Pittsburgh area, we believe that this project could be impactful due to its connection to recent events in the community. There is a huge opportunity to bring awareness and uncover insights that would be relevant for future infrastructure planning policy. This problem space also could yield novel exploration that will offer surprises and new knowledge for our team. 
 
-## Data Processing 
+## Data Processing and Sketches
+
+### Data Processing 
 
 When exploring our datasets, we found that there will be minimal cleanup or preprocessing necessary since we are gaining them from governement departmental websites, and there are no null values found. We plan to filter the categories such as condition, county, bridge type, improvement type, average daily traffic, cost and budget, etc. We are executing our prepocessing using python and pandas library. 
 
@@ -25,7 +27,7 @@ When exploring our datasets, we found that there will be minimal cleanup or prep
 <img width="602" alt="image" src="https://user-images.githubusercontent.com/25258772/163449024-d607ae90-0957-414e-a0d7-cfbb030b28f4.png">
 
 
-## Sketches
+### Sketches
 
 The skecthes below showcase who we plan on structuring our project. The current structure will be (1) Introduction to problem space and visualization of scale of bridge conditions and improvements in PA, (2) Display of budge allocation, raod repair, etc. and how PA compares to others states, and (3) reveal any spatial patterns by visualizing bridge condition among PA counties. We plan for it to be interactive, and allow users to filter categories and see an updated visualization. 
 
