@@ -11,3 +11,27 @@ We will attempt to use both national and state-level databases to help us addres
 
 ### Conclusion 
 As students who reside in the Pittsburgh area, we believe that this project could be impactful due to its connection to recent events in the community. There is a huge opportunity to bring awareness and uncover insights that would be relevant for future infrastructure planning policy. This problem space also could yield novel exploration that will offer surprises and new knowledge for our team. 
+
+## Data Processing 
+
+When exploring our datasets, we found that there will be minimal cleanup or preprocessing necessary since we are gaining them from governement departmental websites, and there are no null values found. We plan to filter the categories such as condition, county, bridge type, improvement type, average daily traffic, cost and budget, etc. We are executing our prepocessing using python and pandas library. 
+
+<img width="641" alt="image" src="https://user-images.githubusercontent.com/25258772/163445536-49c660bb-d161-4dd5-b59c-d1b62e93d9c0.png">
+
+<img width="555" alt="image" src="https://user-images.githubusercontent.com/25258772/163446441-b6ddb1d7-c8d4-4433-8fcd-a24f8ee77bd0.png">
+
+<img width="596" alt="image" src="https://user-images.githubusercontent.com/25258772/163448895-f816c41f-203d-48f3-bbe4-16b89b1b64b9.png">
+
+<img width="602" alt="image" src="https://user-images.githubusercontent.com/25258772/163449024-d607ae90-0957-414e-a0d7-cfbb030b28f4.png">
+
+
+## Sketches
+
+The skecthes below showcase who we plan on structuring our project. The current structure will be (1) Introduction to problem space and visualization of scale of bridge conditions and improvements in PA, (2) Display of budge allocation, raod repair, etc. and how PA compares to others states, and (3) reveal any spatial patterns by visualizing bridge condition among PA counties. We plan for it to be interactive, and allow users to filter categories and see an updated visualization. 
+
+<img width="957" alt="image" src="https://user-images.githubusercontent.com/25258772/163446764-a7630762-0c76-4a4c-baad-d46073b7016c.png">
+
+<img width="1269" alt="image" src="https://user-images.githubusercontent.com/25258772/163448790-c5e11db7-3bfb-415f-90d0-74914a87922a.png">
+
+<img width="549" alt="image" src="https://user-images.githubusercontent.com/25258772/163448948-236b7e4f-f040-4cac-8768-87a1529f13fa.png">
+
