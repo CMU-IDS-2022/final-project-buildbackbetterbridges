@@ -1,0 +1,10 @@
+﻿Type of Bridge,Number of Bridges,Area of All Bridges,Daily Crossings on All Bridges,Number of Structurally Deficient Bridges,Area of Structurally Deficient Bridges,Daily Crossings on Structurally Deficient Bridges
+Rural minor collector,"2,054","421,076","1,465,734",291,"46,963","197,808"
+Rural local road,"7,334","1,149,837","2,906,077","1,596","198,345","545,615"
+Urban Interstate,"1,451","3,070,234","54,826,326",60,"147,889","2,773,447"
+Urban freeway/expressway,922,"1,336,122","23,960,943",32,"58,083","1,135,553"
+Urban other principal arterial,"1,447","1,853,303","22,587,132",144,"157,155","2,366,177"
+Urban minor arterial,"1,517","1,091,126","13,407,142",165,"93,109","1,461,782"
+Urban collector,"1,448","603,768","5,711,400",191,"55,522","745,982"
+Urban local road,"1,596","610,137","3,838,251",340,"103,826","678,870"
+Total,"23,166","13,315,595","162,435,530","3,198","972,716","11,564,234"
