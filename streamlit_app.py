@@ -13,11 +13,15 @@ def load_data_ARTBA():
 
 def load_data_BIPA():
     bipa_url = "https://raw.githubusercontent.com/CMU-IDS-2022/final-project-buildbackbetterbridges/main/data/Bridge_Inventory_PA.csv"
-    return pd.read_csv(bipa_url)
+    data = pd.read_csv(bipa_url, thousands=r',')
+    data = data[:-1]
+    return data
 
 def load_data_PBW():
     pbw_url = "https://raw.githubusercontent.com/CMU-IDS-2022/final-project-buildbackbetterbridges/main/data/Proposed_Bridge_Work.csv"
-    return pd.read_csv(pbw_url)
+    data = pd.read_csv(pbw_url, thousands=r',')
+    data = data[:-1]
+    return data
 
 def load_data_RASP():
     rasp_url = "https://raw.githubusercontent.com/CMU-IDS-2022/final-project-buildbackbetterbridges/main/data/Report_A2_STATE_PUBLIC.csv"
@@ -89,23 +93,94 @@ st.write("Here, we see that Pennsylvania ranks in the top 5 states for both numb
 st.header("Next, let's have a high-level overview on the condition of PA bridges.")
 
 state_source_count = pd.DataFrame({"Condition": ["Good", "Fair", "Poor"], "Percentage": ["34.43", "55.95", "9.55"]})
-state_source_deckArea = pd.DataFrame({"category": ["Good Condition", "Fair Condition", "Poor Condition"], "Percentage": ["29.84%", "64.24", "5.85%"]})
+state_source_deckArea = pd.DataFrame({"Condition": ["Good", "Fair", "Poor"], "Percentage": ["29.84", "64.24", "5.85"]})
+local_source_count = pd.DataFrame({"Condition": ["Good", "Fair", "Poor"], "Percentage": ["25.08", "48.96", "25.74"]})
+local_source_deckArea = pd.DataFrame({"Condition": ["Good", "Fair", "Poor"], "Percentage": ["25.65", "52.98", "20.97"]})
 
-pie_chart_state = alt.Chart(state_source_count).mark_arc(
+source_state = pd.DataFrame({"Condition": ["Good", "Fair", "Poor", "Good", "Fair", "Poor"], "Percentage": ["34.43", "55.95", "9.55", "29.84", "64.24", "5.85"], "Method": ["Count", "Count", "Count", "DeckArea", "DeckArea", "DeckArea"]})
+source_local = pd.DataFrame({"Condition": ["Good", "Fair", "Poor", "Good", "Fair", "Poor"], "Percentage": ["25.08", "48.96", "25.74", "25.65", "52.98", "20.97"], "Method": ["Count", "Count", "Count", "DeckArea", "DeckArea", "DeckArea"]})
+
+select_box = alt.binding_select(name="Method of Measure ", options=list(source_state["Method"].unique()))
+selection = alt.selection_single(fields=['Method'], bind=select_box)
+
+pie_chart_state = alt.Chart(source_state).mark_arc(
 	tooltip=True,
 	innerRadius=50
 ).encode(
     theta=alt.Theta(field="Percentage", type="quantitative"),
     color=alt.Color(field="Condition", type="nominal"),
 ).properties(
-	title="Conditions of Bridges on State Route System"
+	title="Conditions of Bridges on State Route System",
+	width=325
+).add_selection(
+	selection
+).transform_filter(
+    selection
 )
 
+pie_chart_local = alt.Chart(source_local).mark_arc(
+	tooltip=True,
+	innerRadius=50
+).encode(
+    theta=alt.Theta(field="Percentage", type="quantitative"),
+    color=alt.Color(field="Condition", type="nominal"),
+).properties(
+	title="Conditions of Bridges on Local Route System",
+	width=325
+).add_selection(
+	selection
+).transform_filter(
+    selection
+)
 
-st.write(pie_chart_state)
+road_compare = alt.hconcat(pie_chart_state, pie_chart_local)
+st.write(road_compare)
+
+st.write("By count, roughly 6% of bridges on the State Route System are in poor condition, while roughly 1 in 4 bridges on the Local Route System are in poor condition. If measured by deck area, 21% of bridges in the Local Route System are in poor condition. A bridge that is considered to be in poor condition received a rating of 4 or below by state-certified bridge inspectors during each inspection of the bridge:")
+
+st.markdown("4 = Poor, deterioration of primary structural elements has advanced.")
+st.markdown("3 = Serious, deterioration has seriously affected the primary structural components.")
+st.markdown("2 = Critical, deterioration of primary structural components has advanced and bridge will be closely monitored, or closed, until corrective action can be taken.")
+st.markdown("1 = Imminent failure, major deterioration in critical structural components. Bridge is closed but corrective action may put the bridge back into light service.")
+st.markdown("0 = Failed, bridge is out of service and beyond corrective action.")
 
 st.header("What types of bridges need the most help?")
 
+bridge_types = alt.Chart(df_bipa).mark_circle(size=60).encode(
+    x=alt.X('Daily Crossings on All Bridges:Q', scale=alt.Scale(domain=(0, 60000000))),
+    y=alt.Y('Number of Structurally Deficient Bridges:Q', scale=alt.Scale(domain=(0, 1800))),
+    color='Type of Bridge',
+    tooltip=['Type of Bridge', 'Number of Bridges', 'Number of Structurally Deficient Bridges', 'Daily Crossings on All Bridges']
+).properties(
+	height=350,
+	width=800
+).interactive()
+
+st.write(bridge_types)
+
+st.write("It appears that the bridges that need the most help are not necessarily those that are used the most. Here, we can see that bridges on rural local roads have been especially neglected.")
+
 st.header("How much funding do we need to fix and repair these bridges?")
 
+funding_types = alt.Chart(df_pbw).mark_bar(tooltip=True).encode(
+    x=alt.X('Cost to Repair (in millions):Q'),
+    y=alt.Y("Type of Work:N", sort="-x"),
+).properties(
+	width=700
+)
+
+st.write(funding_types)
+
+funding_stacked = alt.Chart(df_pbw).mark_bar().encode(
+    x=alt.X('sum(Cost to Repair (in millions)):Q',scale=alt.Scale(domain=(0, 18522))),
+    color='Type of Work',
+    tooltip=['Cost to Repair (in millions)', 'Type of Work', 'Number of Bridges']
+).properties(
+	width=700,
+	height=80
+)
+
+st.write(funding_stacked)
+
+st.write("As seen above, it would take around 18.5 billion dollars to complete all the work needed on bridges in Pennsylvania alone, with most (~13 billion) of the needed funding going to rehabilitation of the bridge structure.")
 
