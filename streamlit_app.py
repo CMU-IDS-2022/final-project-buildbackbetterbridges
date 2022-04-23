@@ -31,13 +31,18 @@ def load_data_RBLP():
     rblp_url = "https://raw.githubusercontent.com/CMU-IDS-2022/final-project-buildbackbetterbridges/main/data/Report_B2_LOCAL_PUBLIC.csv"
     return pd.read_csv(rblp_url)
 
-st.header("Let's first take a look at how Pennsylvania compares to the rest of the country.")
+def load_data_FED():
+    fed_url = "https://raw.githubusercontent.com/CMU-IDS-2022/final-project-buildbackbetterbridges/main/data/Fed_Funding.csv"
+    return pd.read_csv(fed_url)
+
+st.header("Let's first take a look at how Pennsylvania's bridges compare to the rest of the country.")
 
 df_artba = load_data_ARTBA()
 df_bipa = load_data_BIPA()
 df_pbw = load_data_PBW()
 df_rasp = load_data_RASP()
 df_rblp = load_data_RBLP()
+df_fed = load_data_FED()
 
 # st.write(df_artba)
 
@@ -183,4 +188,31 @@ funding_stacked = alt.Chart(df_pbw).mark_bar().encode(
 st.write(funding_stacked)
 
 st.write("As seen above, it would take around 18.5 billion dollars to complete all the work needed on bridges in Pennsylvania alone, with most (~13 billion) of the needed funding going to rehabilitation of the bridge structure.")
+
+st.header("How does Pennsylvania's transportation funding compare to the rest of the country?")
+st.write(df_fed)
+
+hist_fed = alt.Chart(df_fed).mark_bar(
+    tooltip=True
+).encode(
+	y = alt.Y('Repair_Funding:Q', scale=alt.Scale(domain=(0, 1140917637))),
+	x = alt.X('State:N', axis = alt.Axis(title="Top 5 States – Transportation Repair Funding")),
+	color=alt.condition(
+        alt.datum.State == "Pennsylvania",  # If the rating is 80 it returns True,
+        alt.value('orange'),      # and the matching bars are set as green.
+        # and if it does not satisfy the condition 
+        # the color is set to steelblue.
+        alt.value('steelblue')
+    )
+).properties(
+	width=800
+).transform_window(
+	rank='rank(Repair_Funding)',
+	sort=[alt.SortField('Repair_Funding', order='descending')]
+).transform_filter(
+	(alt.datum.rank < 6)
+)
+
+st.write(hist_fed)
+
 
