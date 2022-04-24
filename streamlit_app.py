@@ -190,7 +190,8 @@ st.write(funding_stacked)
 st.write("As seen above, it would take around 18.5 billion dollars to complete all the work needed on bridges in Pennsylvania alone, with most (~13 billion) of the needed funding going to rehabilitation of the bridge structure.")
 
 st.header("How does Pennsylvania's transportation funding compare to the rest of the country?")
-st.write(df_fed)
+
+st.write("In the chart below we can see that Pennsylvania is fifth in the country for repair funding allocation. Yet, the other states in the top 5 - with the exception of Illinois - are not in the top five of places with the most structurally deficient bridges. ")
 
 hist_fed = alt.Chart(df_fed).mark_bar(
     tooltip=True
