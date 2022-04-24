@@ -195,7 +195,7 @@ st.write(df_fed)
 hist_fed = alt.Chart(df_fed).mark_bar(
     tooltip=True
 ).encode(
-	y = alt.Y('Repair_Funding:Q', scale=alt.Scale(domain=(0, 1140917637))),
+	y = alt.Y('Repair_Funding:Q'),
 	x = alt.X('State:N', axis = alt.Axis(title="Top 5 States – Transportation Repair Funding")),
 	color=alt.condition(
         alt.datum.State == "Pennsylvania",  # If the rating is 80 it returns True,
