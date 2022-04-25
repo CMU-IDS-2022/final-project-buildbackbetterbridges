@@ -93,7 +93,7 @@ hist_artba_2 = alt.Chart(df_artba).mark_bar(
 national_compare = alt.hconcat(hist_artba, hist_artba_2)
 st.write(national_compare)
 
-st.write("Here, we see that Pennsylvania ranks in the top 5 states for both number of structurally deficient bridges in the state as well as percentage of the state's bridges that are structurally defcient. As defined by the Pennsylvania Department of Transportation (PennDOT),a structurally deficient bridge means that deterioration has occurred to one or more of the bridge's major components (deck, superstructure, or substructure). ")
+st.write("Here, we see that Pennsylvania ranks in the top 5 states for both number of structurally deficient bridges in the state as well as percentage of the state's bridges that are structurally defcient. As defined by the Pennsylvania Department of Transportation (PennDOT), a structurally deficient bridge means that deterioration has occurred to one or more of the bridge's major components (deck, superstructure, or substructure). ")
 
 st.header("Next, let's have a high-level overview on the condition of PA bridges.")
 
