@@ -4,6 +4,7 @@ import altair as alt
 
 from urllib.request import urlopen
 import json
+import plotly
 import plotly.express as px
 import pandas as pd
 
@@ -181,7 +182,7 @@ st.write('When exploring the condition of bridges throughout the counties, you c
 with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
  counties = json.load(response)
 
-data_url = 'https://raw.githubusercontent.com/CMU-IDS-2022/final-project-buildbackbetterbridges/main/data/fip_county.csv'
+data_url = 'data/fip_county.csv'
 df = pd.read_csv(data_url)
 
 select_box = alt.binding_select(name="Method of Measure ", options=list(source_state["Method"].unique()))
@@ -208,6 +209,8 @@ counties_breakdown = alt.Chart(df).mark_bar(tooltip=True).encode(
 	width=700
 )
 
+#traffic 
+#fix the counties
 
 st.write(fig)
 with st.expander ('Click to see county breakdown' + condition_selection): 
