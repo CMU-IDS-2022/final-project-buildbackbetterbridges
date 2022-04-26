@@ -175,6 +175,8 @@ st.write("It appears that the bridges that need the most help are not necessaril
 #SECTION TWO: MAP 
 st.header("How is the county and bridge condition related?")
 
+st.write('When exploring the condition of bridges throughout the counties, you can see that, while majority of the counties have high numbers of good or fair bridge conditions, there are some counties that have a concentration of poor condition bridges. These causes one to wonder, what why do some counties have more bridges in poor condition than others?')
+
 #plotly map of PA
 with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
  counties = json.load(response)
@@ -182,8 +184,13 @@ with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-c
 data_url = 'https://raw.githubusercontent.com/CMU-IDS-2022/final-project-buildbackbetterbridges/main/data/fip_county.csv'
 df = pd.read_csv(data_url)
 
+select_box = alt.binding_select(name="Method of Measure ", options=list(source_state["Method"].unique()))
+selection = alt.selection_single(fields=['Method'], bind=select_box)
 
-fig = px.choropleth(df, geojson=counties, locations='fip', color='# of poor',
+conditions = ['# of poor', '# of fair', '# of good']
+condition_selection = st.selectbox("Select Bridge Condition:", conditions, 0)
+
+fig = px.choropleth(df, geojson=counties, locations='fip', color=condition_selection,
  color_continuous_scale='fall',
  range_color=(1, 133),
  scope='usa',
@@ -193,9 +200,18 @@ fig = px.choropleth(df, geojson=counties, locations='fip', color='# of poor',
 fig.update_layout(margin={'r':0,'t':0,'l':0,'b':0})
 fig.update_geos(fitbounds='locations', visible=False)
 
+#breakdown
+counties_breakdown = alt.Chart(df).mark_bar(tooltip=True).encode(
+    x=alt.X(condition_selection + ':Q'),
+    y=alt.Y("counties:N", sort="-x"),
+).properties(
+	width=700
+)
 
 
 st.write(fig)
+with st.expander ('Click to see county breakdown' + condition_selection): 
+    st.write(counties_breakdown)
 
 
 
