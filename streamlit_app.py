@@ -2,6 +2,11 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 
+from urllib.request import urlopen
+import json
+import plotly.express as px
+import pandas as pd
+
 st.title("On the morning of January 28, 2022, Pittsburgh's Forbes Avenue Bridge collapsed just hours before President Joe Biden's visit to the city to promote his infrastructure plan.")
 st.title("This led us to wonder, what is the current status of Pennsylvania's bridges?")
 
@@ -164,6 +169,45 @@ bridge_types = alt.Chart(df_bipa).mark_circle(size=60).encode(
 st.write(bridge_types)
 
 st.write("It appears that the bridges that need the most help are not necessarily those that are used the most. Here, we can see that bridges on rural local roads have been especially neglected.")
+
+
+
+#SECTION TWO: MAP 
+st.header("How is the county and bridge condition related?")
+
+#plotly map of PA
+with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
+ counties = json.load(response)
+
+data_url = 'https://raw.githubusercontent.com/CMU-IDS-2022/final-project-buildbackbetterbridges/main/data/fip_county.csv'
+df = pd.read_csv(data_url)
+
+
+fig = px.choropleth(df, geojson=counties, locations='fip', color='# of poor',
+ color_continuous_scale='fall',
+ range_color=(1, 133),
+ scope='usa',
+ hover_name='counties',
+ labels={'counties':'County Name:'}
+ )
+fig.update_layout(margin={'r':0,'t':0,'l':0,'b':0})
+fig.update_geos(fitbounds='locations', visible=False)
+
+
+
+st.write(fig)
+
+
+
+
+
+
+
+
+
+
+
+
 
 st.header("How much funding do we need to fix and repair these bridges?")
 
