@@ -187,7 +187,7 @@ df = pd.read_csv(data_url)
 select_box = alt.binding_select(name="Method of Measure ", options=list(source_state["Method"].unique()))
 selection = alt.selection_single(fields=['Method'], bind=select_box)
 
-conditions = ['# of poor', '# of fair', '# of good']
+conditions = ['# of poor', '# of fair', '# of good', 'population', 'total bridges', 'avg traffic']
 condition_selection = st.selectbox("Select Bridge Condition:", conditions, 0)
 
 fig = px.choropleth(df, geojson=counties, locations='fip', color=condition_selection,
