@@ -172,7 +172,6 @@ st.write(bridge_types)
 st.write("It appears that the bridges that need the most help are not necessarily those that are used the most. Here, we can see that bridges on rural local roads have been especially neglected.")
 
 
-
 #SECTION TWO: MAP 
 st.header("How is the county and bridge condition related?")
 
@@ -192,8 +191,8 @@ conditions = ['# of poor', '# of fair', '# of good']
 condition_selection = st.selectbox("Select Bridge Condition:", conditions, 0)
 
 fig = px.choropleth(df, geojson=counties, locations='fip', color=condition_selection,
- color_continuous_scale='fall',
- range_color=(1, 133),
+ color_continuous_scale='GnBu',
+ range_color=(df[condition_selection].min(), df[condition_selection].max()),
  scope='usa',
  hover_name='counties',
  labels={'counties':'County Name:'}
@@ -209,12 +208,15 @@ counties_breakdown = alt.Chart(df).mark_bar(tooltip=True).encode(
 	width=700
 )
 
-#traffic 
-#fix the counties
+#population 
+#Total bridges 
 
 st.write(fig)
 with st.expander ('Click to see county breakdown' + condition_selection): 
     st.write(counties_breakdown)
+
+
+
 
 
 
