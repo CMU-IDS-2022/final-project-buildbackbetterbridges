@@ -187,8 +187,8 @@ df = pd.read_csv(data_url)
 select_box = alt.binding_select(name="Method of Measure ", options=list(source_state["Method"].unique()))
 selection = alt.selection_single(fields=['Method'], bind=select_box)
 
-conditions = ['# of poor', '# of fair', '# of good', 'population', 'total bridges', 'avg traffic']
-condition_selection = st.selectbox("Select Bridge Condition:", conditions, 0)
+conditions = ['# of poor', '# of fair', '# of good', 'population', 'total bridges', 'avg daily traffic']
+condition_selection = st.selectbox("Select Category to view on map:", conditions, 0)
 
 fig = px.choropleth(df, geojson=counties, locations='fip', color=condition_selection,
  color_continuous_scale='GnBu',
@@ -212,12 +212,8 @@ counties_breakdown = alt.Chart(df).mark_bar(tooltip=True).encode(
 #Total bridges 
 
 st.write(fig)
-with st.expander ('Click to see county breakdown' + condition_selection): 
+with st.expander ('Click to see county breakdown ' + condition_selection): 
     st.write(counties_breakdown)
-
-
-
-
 
 
 
