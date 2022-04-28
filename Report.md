@@ -53,3 +53,13 @@ To improve our visualizations in the future we’d hope to add more interactions
 
 For future researchers and data scientists, this space is ripe for exploration and there is so much open data out there on the internet. The biggest challenge is the cleaning and sifting through it in order to manageably visualize and interact with the different sources collected. Our team’s recommendation for those who perhaps have more time or expertise in this area would be to pair contrasting findings together and allow users to really dive into where these points diverge and why. Qualitative data could also be utilized to complement the quantitative data that often comes up in areas such as city and state budgets and percentages of disrepair. While the numbers tell an entire story in themselves, for some of the more contradictory or surprising findings that arose, some qualitative data such as from interviews of state agency employees, budget commissioners, civil engineers, or everyday taxpayers would be crucial to understanding the human side of why the funding doesn’t match up to the needs of Pennsylvania roads. 
 
+## References
+
+[1]https://apnews.com/article/joe-biden-business-pittsburgh-bridge-collapses-b91476e4d1dc1c7839bd0c39e7be186e 
+[2]https://archive.curbed.com/2019/5/14/18622511/construction-highway-roads-infrastructure-week 
+[3]https://www.penndot.pa.gov/about-us/media/funding/Documents/PennDOT-Pathways_By-The-Numbers.pdf 
+[4] https://artbabridgereport.org/state/profile/PA 
+[5]https://nap.nationalacademies.org/catalog/14540/funding-for-infrastructure-maintenance-achieving-and-sustaining-a-state-of-good-repair
+[6]https://www.sciencedirect.com/science/article/pii/S0965856417314155?casa_token=kqrqKpNoIhgAAAAA:U5g4bTawBvkxHQnWmUTPYYc4bcu6QQ29pIhg0D6O2bC4vNLAHjL6FM-c-phfaQhBbO8YKuHs
+[7] https://infrastructurereportcard.org/cat-item/bridges/ 
+
