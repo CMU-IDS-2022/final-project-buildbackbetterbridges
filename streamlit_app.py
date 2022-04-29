@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import altair as alt
+import numpy as np
 
 from urllib.request import urlopen
 import json
@@ -175,8 +176,9 @@ st.write("It appears that the bridges that need the most help are not necessaril
 #SECTION TWO: MAP 
 st.header("How is the county and bridge condition related?")
 
-st.write('When exploring the condition of bridges throughout the counties, you can see that, while majority of the counties have high numbers of good or fair bridge conditions, there are some counties that have a concentration of poor condition bridges. These causes one to wonder, what why do some counties have more bridges in poor condition than others?')
+st.write('When exploring the condition of bridges throughout the counties, you can see that, while majority of the counties have high numbers of good or fair bridge conditions, there are some counties that have a concentration of poor condition bridges. These causes one to wonder, why do some counties have more bridges in poor condition than others?')
 
+st.write('For example, you can see that although Philadelphia has a larger population and average daily traffic, Alleghany and Luzerne county have a larger number of bridges in poor condition. This shows that there may be other contributing factors such as terrain or the number of rivers that may have a strong influence on the condition of Pennsylvania bridges.')
 #plotly map of PA
 with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
  counties = json.load(response)

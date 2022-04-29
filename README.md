@@ -8,7 +8,9 @@
 
 ## Work distribution
 
-Update towards the end of the project.
+Intro and Overview Section Section - Jacqueline 
+Map Section - Joshua 
+Budget Section - Healy 
 
 ## Deliverables
 
